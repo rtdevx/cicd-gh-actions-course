@@ -16,7 +16,7 @@ jobs:
           node-version: 18
       - name: Install dependencies
         run: | 
-          cd react-demo
+          # cd react-demo
           npm ci
       - name: Run tests
         run: npm test
