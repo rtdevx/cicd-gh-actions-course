@@ -1,7 +1,7 @@
 name: 03 - Exercise
 on: [push, workflow_dispatch]
 jobs:
-  test:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - name: Get code
@@ -18,3 +18,21 @@ jobs:
         run: |
           cd 03-exercise
           npm run lint
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v6
+      - name: Install NodeJS
+        uses: actions/setup-node@v6
+        with:
+          node-version: 18
+      - name: Install dependencies
+        run: | 
+          cd 03-exercise
+          npm ci
+      - name: Run tests
+        run: |
+          cd 03-exercise
+          npm run test          
