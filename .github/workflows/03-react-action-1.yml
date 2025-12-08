@@ -1,4 +1,4 @@
-name: Deploy Project
+name: 03 - Deploy Project
 on: [push, workflow_dispatch]
 jobs:
   test:
@@ -16,7 +16,7 @@ jobs:
           node-version: 18
       - name: Install dependencies
         run: | 
-          cd react-app/
+          cd public/cicd-gh-actions-course/react-app
           npm ci
       - name: Run tests
         run: npm test
