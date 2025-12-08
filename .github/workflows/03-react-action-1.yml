@@ -12,11 +12,11 @@ jobs:
           node-version: 18
       - name: Install dependencies
         run: | 
-          cd react-demo
+          cd 03-react-demo
           npm ci
       - name: Run tests
         run: |
-          cd react-demo
+          cd 03-react-demo
           npm test
   deploy:
     needs: test
@@ -30,11 +30,11 @@ jobs:
           node-version: 18
       - name: Install dependencies
         run: | 
-          cd react-demo
+          cd 03-react-demo
           npm ci
       - name: Build project
         run: |
-          cd react-demo
+          cd 03-react-demo
           npm run build
       - name: Deploy
         run: echo "Deploying ..."          
