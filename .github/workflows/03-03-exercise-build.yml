@@ -12,11 +12,11 @@ jobs:
           node-version: 18
       - name: Install dependencies
         run: | 
-          cd 03-exercise
+          cd 03-react-exercise
           npm ci
       - name: Run lint
         run: |
-          cd 03-exercise
+          cd 03-react-exercise
           npm run lint
 
   test:
@@ -31,11 +31,11 @@ jobs:
           node-version: 18
       - name: Install dependencies
         run: | 
-          cd 03-exercise
+          cd 03-react-exercise
           npm ci
       - name: Run tests
         run: |
-          cd 03-exercise
+          cd 03-react-exercise
           npm run test       
           
   deploy:
@@ -50,11 +50,11 @@ jobs:
           node-version: 18
       - name: Install dependencies
         run: | 
-          cd 03-exercise
+          cd 03-react-exercise
           npm ci
       - name: Run tests
         run: |
-          cd 03-exercise
+          cd 03-react-exercise
           npm run build
       - name: Deploy code
         run: echo "Deploying..."          
