@@ -1,4 +1,4 @@
-name: 03 - Excercise
+name: 03 - Exercise
 on: [push, workflow_dispatch]
 jobs:
   test:
@@ -17,4 +17,4 @@ jobs:
       - name: Run lint
         run: |
           cd 03-exercise
-          npm run lint
+          npm lint
