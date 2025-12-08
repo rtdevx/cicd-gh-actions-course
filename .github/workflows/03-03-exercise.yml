@@ -21,6 +21,7 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
+    needs: lint
     steps:
       - name: Get code
         uses: actions/checkout@v6
@@ -35,4 +36,23 @@ jobs:
       - name: Run tests
         run: |
           cd 03-exercise
-          npm run test          
+          npm run test       
+          
+  build:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Get code
+        uses: actions/checkout@v6
+      - name: Install NodeJS
+        uses: actions/setup-node@v6
+        with:
+          node-version: 18
+      - name: Install dependencies
+        run: | 
+          cd 03-exercise
+          npm ci
+      - name: Run tests
+        run: |
+          cd 03-exercise
+          npm run build       
