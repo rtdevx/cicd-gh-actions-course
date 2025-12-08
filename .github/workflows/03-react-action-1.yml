@@ -16,7 +16,7 @@ jobs:
           node-version: 18
       - name: Install dependencies
         run: | 
-          cd public/cicd-gh-actions-course/react-app
+          cd ./react-demo
           npm ci
       - name: Run tests
         run: npm test
