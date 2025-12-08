@@ -1,4 +1,4 @@
-name: Events Demo 1
+name: 04-01 - Exercise - Events
 on: push
 jobs:
   deploy:
