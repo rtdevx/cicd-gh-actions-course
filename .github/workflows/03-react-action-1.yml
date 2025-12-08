@@ -9,7 +9,7 @@ jobs:
         with:
           # Repository name with owner. For example, actions/checkout
           # Default: ${{ github.repository }}
-          repository: '${{ github.repository }}/react-demo'
+          repository: '${{ github.repository }}'
       - name: Install NodeJS
         uses: actions/setup-node@v3
         with:
