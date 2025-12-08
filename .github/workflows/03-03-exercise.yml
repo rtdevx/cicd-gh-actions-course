@@ -1,0 +1,20 @@
+name: 03 - Excercise
+on: [push, workflow_dispatch]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v6
+      - name: Install NodeJS
+        uses: actions/setup-node@v6
+        with:
+          node-version: 18
+      - name: Install dependencies
+        run: | 
+          cd 03-exercise
+          npm ci
+      - name: Run lint
+        run: |
+          cd 03-exercise
+          npm run lint
