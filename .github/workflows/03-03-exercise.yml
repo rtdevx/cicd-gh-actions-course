@@ -17,4 +17,4 @@ jobs:
       - name: Run lint
         run: |
           cd 03-exercise
-          npm lint
+          npm run lint
