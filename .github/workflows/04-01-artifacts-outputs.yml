@@ -35,9 +35,10 @@ jobs:
         uses: actions/upload-artifact@v5
         with:
           name: dist-files
-          path: |
-            04-react-exercise/dist
-            04-react-exercise/package.json
+          path: 04-react-exercise/dist
+          #path: |
+          #  04-react-exercise/dist
+          #  04-react-exercise/package.json
   deploy:
     needs: build
     runs-on: ubuntu-latest
