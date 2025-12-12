@@ -34,9 +34,9 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v5
         with:
-          name: build-output
+          name: dist-files
           path: |
-            build-output
+            dist
   deploy:
     needs: build
     runs-on: ubuntu-latest
