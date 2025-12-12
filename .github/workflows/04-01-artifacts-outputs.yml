@@ -53,5 +53,8 @@ jobs:
         uses: actions/download-artifact@v5
         with:
           name: dist-files
+  
+      - name: Output filename-output
+        run: echo "${{needs.build.outputs.script-file}}" # Use job output
       - name: Deploy
         run: echo "Deploying..."
