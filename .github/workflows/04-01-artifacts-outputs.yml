@@ -1,4 +1,4 @@
-name: Deploy website
+name: 04-01  Artifacts and outputs
 on:
   push:
     branches:

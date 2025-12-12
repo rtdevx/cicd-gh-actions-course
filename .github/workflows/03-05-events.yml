@@ -1,4 +1,4 @@
-name: 04-01 - Exercise - Events
+name: 03-05 Events
 on:
   pull_request:
     types:

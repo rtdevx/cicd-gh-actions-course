@@ -1,4 +1,4 @@
-name: 03-01 - Deploy Project
+name: 03-01 Deploy Project
 on: [workflow_dispatch]
 jobs:
   test:

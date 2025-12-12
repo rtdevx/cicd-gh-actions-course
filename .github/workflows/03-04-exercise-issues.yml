@@ -1,4 +1,4 @@
-name: 03-03 - Exercise - Issues
+name: 03-04 Exercise - Issues
 on: issues
 jobs:
   info:
