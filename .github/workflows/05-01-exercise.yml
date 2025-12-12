@@ -1,4 +1,4 @@
-name: Deployment
+name: 05-01 - Exercise - Deployment
 on:
   push:
     branches:
