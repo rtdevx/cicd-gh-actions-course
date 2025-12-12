@@ -18,19 +18,19 @@ jobs:
           key: npm-deps-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependencies
         run: |
-          cd 05-01-react-exercise
+          cd 05-react-exercise
           npm ci
       - name: Run server
         run: |
-          cd 05-01-react-exercise
+          cd 05-react-exercise
           npm start & npx wait-on http://127.0.0.1:XYZ
       - name: Run tests
         run: |
-          cd 05-01-react-exercise 
+          cd 05-react-exercise 
           npm test
       - name: Output information
         run: |
-          cd 05-01-react-exercise
+          cd 05-react-exercise
           echo "..."
   deploy:
     needs: test
