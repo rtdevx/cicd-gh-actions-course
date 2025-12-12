@@ -27,7 +27,7 @@ jobs:
       - name: Run server
         run: |
           cd 05-react-exercise
-          npm start & npx wait-on http://127.0.0.1:XYZ
+          npm start & npx wait-on http://127.0.0.1:8080
       - name: Run tests
         run: |
           cd 05-react-exercise 
