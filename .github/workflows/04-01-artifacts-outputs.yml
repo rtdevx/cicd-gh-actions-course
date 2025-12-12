@@ -37,6 +37,7 @@ jobs:
           name: dist-files
           path: |
             04-react-exercise/dist
+            04-react-exercise/package.json
   deploy:
     needs: build
     runs-on: ubuntu-latest
