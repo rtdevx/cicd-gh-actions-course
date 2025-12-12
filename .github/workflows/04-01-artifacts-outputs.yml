@@ -9,6 +9,11 @@ jobs:
     steps:
       - name: Get code
         uses: actions/checkout@v3
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: deps-node-modules-${{ hashFiles('**/package-lock.json') }} # Generating cache key based on package-lock.json        
       - name: Install dependencies
         run: npm ci
         working-directory: 04-react-exercise
@@ -26,6 +31,12 @@ jobs:
     steps:
       - name: Get code
         uses: actions/checkout@v3
+
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: deps-node-modules-${{ hashFiles('**/package-lock.json') }} # Generating cache key based on package-lock.json
       - name: Install dependencies
         run: npm ci
         working-directory: 04-react-exercise
