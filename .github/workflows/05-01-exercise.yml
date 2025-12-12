@@ -4,6 +4,10 @@ on:
     branches:
       - main
       - dev
+
+permissions:
+  contents: write      
+      
 jobs:
   test:
     environment: testing
@@ -38,4 +42,4 @@ jobs:
     steps:
       - name: Output information
         run: |        
-          echo "...."
+          echo "..."
