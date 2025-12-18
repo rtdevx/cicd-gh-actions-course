@@ -40,7 +40,7 @@ jobs:
         run: npm run test
         working-directory: 06-react-exercise
       - name: Upload test report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v6
         with:
           name: test-report
           path: test.json
@@ -64,7 +64,7 @@ jobs:
         working-directory: 06-react-exercise
         run: npm run build
       - name: Upload artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v6
         with:
           name: dist-files
           path: dist
