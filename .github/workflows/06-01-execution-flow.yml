@@ -83,3 +83,13 @@ jobs:
         #working-directory: 06-react-exercise
       - name: Deploy
         run: echo "Deploying..."
+  report:
+    needs: [test, build, deploy]
+    if: ${{ failure()}}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Output information
+        run: |
+          echo "Something went wrong in one of the previous jobs."
+          echo "${{ github.job }} failed."
+
