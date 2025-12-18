@@ -78,6 +78,6 @@ jobs:
           name: dist-files
       - name: Output contents
         run: ls
-        working-directory: 06-react-exercise
+        #working-directory: 06-react-exercise
       - name: Deploy
         run: echo "Deploying..."
