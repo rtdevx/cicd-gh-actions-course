@@ -43,7 +43,7 @@ jobs:
         uses: actions/upload-artifact@v6
         with:
           name: test-report
-          path: test.json
+          path: 06-react-exercise/test.json
   build:
     needs: test
     runs-on: ubuntu-latest
