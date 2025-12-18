@@ -41,7 +41,7 @@ jobs:
         run: npm run test
         working-directory: 06-react-exercise
       - name: Upload test report
-        if: failure() && steps.run-tests.outcome == 'failure'
+        if: ${{ failure() && steps.run-tests.outcome == 'failure' }}
         uses: actions/upload-artifact@v6
         with:
           name: test-report
