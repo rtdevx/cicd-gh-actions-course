@@ -67,7 +67,7 @@ jobs:
         uses: actions/upload-artifact@v6
         with:
           name: dist-files
-          path: dist
+          path: 06-react-exercise/dist
   deploy:
     needs: build
     runs-on: ubuntu-latest
