@@ -7,10 +7,14 @@ on:
         required: true
         default: dist
         type: string
-    secrets:
-      DEPLOYMENT_TOKEN:
-        description: 'Token used for deployment'
-        required: false    
+    outputs:
+      deployment_status:
+        description: 'Status of the deployment'
+        value: 'success'        
+    #secrets:
+      #DEPLOYMENT_TOKEN:
+        #description: 'Token used for deployment'
+        #required: false    
 
 jobs:
   deploy:
@@ -27,3 +31,5 @@ jobs:
         run: |
           echo "This is a reusable workflow example."
           echo "You can add deployment steps here."
+      - name: Set deployment status
+        run: echo "deployment_status=success" >> $GITHUB_OUTPUT    
