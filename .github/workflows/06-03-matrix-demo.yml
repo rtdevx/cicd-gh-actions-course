@@ -16,8 +16,11 @@ jobs:
       matrix:
         # Define combinations to run: Node versions and operating systems.
         # The job will run for every pair (node-version x operating-system).
-        node-version: [14, 16, 18]
+        node-version: [12, 14, 16]
         operating-system: [ubuntu-latest, windows-latest]
+        include:
+          - node-version: 18
+            operating-system: ubuntu-latest
 
     # Use the operating-system value from the matrix for the runner.
     runs-on: ${{ matrix['operating-system'] }}
