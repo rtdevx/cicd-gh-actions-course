@@ -1,0 +1,12 @@
+name: 06-04 Reusable Workflow
+on:
+  workflow_call:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Output information
+        run: |
+          echo "This is a reusable workflow example."
+          echo "You can add deployment steps here."
