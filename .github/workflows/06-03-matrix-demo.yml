@@ -1,34 +1,25 @@
-name: My Awesome Workflow
-run-name: Deploying ${{ github.workflow_ref }} by ${{ github.actor }} 🚀06-03 Matrix Demo
+name: 06-03 Matrix Demo
 on:
   push:
     branches:
       - main 
 
 jobs:
-  # Lint job: installs deps (if not cached) and runs linter.
-  lint:
+  build:
     runs-on: ubuntu-latest
-    steps:          
+    steps:
       - name: Get code
         uses: actions/checkout@v3
-        # Checkout repository so following steps can access source files.
 
-      - name: Cache dependencies
-        id: cache
-        uses: actions/cache@v3
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
         with:
-          # Cache node_modules (local path inside runner home). Key uses package-lock.json hash.
-          path: ~/06-react-exercise/node_modules
-          key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
+          node-version: '14'
 
       - name: Install dependencies
-        # Only install when cache miss to speed up runs.
-        if: steps.cache.outputs.cache-hit != 'true'  
         run: npm ci
-        working-directory: 06-react-exercise
+        working-directory: 06-react-exercise 
 
-      - name: Lint code
-        # Run linter inside the exercise folder.
-        run: npm run lint
-        working-directory: 06-react-exercise      
+      - name: Build project
+        run: npm run build
+        working-directory: 06-react-exercise  
