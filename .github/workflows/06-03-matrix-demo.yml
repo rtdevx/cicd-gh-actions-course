@@ -6,6 +6,7 @@ on:
 
 jobs:
   build:
+    continue-on-error: true
     strategy:
       matrix:
         node-version: [14, 16, 18]
@@ -26,4 +27,4 @@ jobs:
 
       - name: Build project
         run: npm run build
-        working-directory: 06-react-exercise  
+        working-directory: 06-react-exercise
