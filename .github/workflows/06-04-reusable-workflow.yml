@@ -1,11 +1,23 @@
 name: 06-04 Reusable Workflow
 on:
   workflow_call:
-
+    inputs:
+      artifact_name:
+        description: 'Name of the artifact to be used'
+        required: true
+        default: dist
+        type: string
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+
+      - name: Get Code
+        uses: actions/download-artifact@v6
+        with:
+          name: ${{ inputs.artifact_name }}
+      - name: List files
+        run: ls -la          
       - name: Output information
         run: |
           echo "This is a reusable workflow example."
