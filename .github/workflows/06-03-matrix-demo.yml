@@ -1,0 +1,33 @@
+name: github.workflow_ref
+on:
+  push:
+    branches:
+      - main 
+
+jobs:
+  # Lint job: installs deps (if not cached) and runs linter.
+  lint:
+    runs-on: ubuntu-latest
+    steps:          
+      - name: Get code
+        uses: actions/checkout@v3
+        # Checkout repository so following steps can access source files.
+
+      - name: Cache dependencies
+        id: cache
+        uses: actions/cache@v3
+        with:
+          # Cache node_modules (local path inside runner home). Key uses package-lock.json hash.
+          path: ~/06-react-exercise/node_modules
+          key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Install dependencies
+        # Only install when cache miss to speed up runs.
+        if: steps.cache.outputs.cache-hit != 'true'  
+        run: npm ci
+        working-directory: 06-react-exercise
+
+      - name: Lint code
+        # Run linter inside the exercise folder.
+        run: npm run lint
+        working-directory: 06-react-exercise
