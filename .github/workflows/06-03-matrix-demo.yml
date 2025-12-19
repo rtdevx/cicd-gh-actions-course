@@ -9,6 +9,7 @@ jobs:
     strategy:
       matrix:
         node-version: [14, 16, 18]
+        operating-system: [ubuntu-latest, windows-latest]
     runs-on: ubuntu-latest
     steps:
       - name: Get code
