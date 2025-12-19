@@ -14,9 +14,10 @@ jobs:
         id: cache
         uses: actions/cache@v3
         with:
-          path: ~/06-react-exercise/.npm
+          path: ~/06-react-exercise/node_modules
           key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'  
         run: npm ci
         working-directory: 06-react-exercise
       - name: Lint code
