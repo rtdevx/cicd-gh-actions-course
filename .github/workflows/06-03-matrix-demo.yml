@@ -1,4 +1,5 @@
-name: github.workflow_ref
+name: My Awesome Workflow
+run-name: Deploying ${{ github.workflow_ref }} by ${{ github.actor }} 🚀06-03 Matrix Demo
 on:
   push:
     branches:
@@ -30,4 +31,4 @@ jobs:
       - name: Lint code
         # Run linter inside the exercise folder.
         run: npm run lint
-        working-directory: 06-react-exercise
+        working-directory: 06-react-exercise      
