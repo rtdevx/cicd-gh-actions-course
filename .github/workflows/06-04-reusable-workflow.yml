@@ -18,6 +18,8 @@ on:
 
 jobs:
   deploy:
+    outputs:
+      deployment_status: ${{ steps.set-deployment-status.outputs.deployment_status }}
     runs-on: ubuntu-latest
     steps:
 
