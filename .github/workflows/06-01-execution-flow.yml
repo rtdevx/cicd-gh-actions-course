@@ -1,3 +1,5 @@
+# 06-01 Execution Flow
+# Trigger: run on push to main branch.
 name: 06-01  Execution Flow
 on:
   push:
@@ -5,74 +7,100 @@ on:
       - main
       
 jobs:
+  # Lint job: installs deps (if not cached) and runs linter.
   lint:
     runs-on: ubuntu-latest
     steps:          
       - name: Get code
         uses: actions/checkout@v3
+        # Checkout repository so following steps can access source files.
+
       - name: Cache dependencies
         id: cache
         uses: actions/cache@v3
         with:
+          # Cache node_modules (local path inside runner home). Key uses package-lock.json hash.
           path: ~/06-react-exercise/node_modules
           key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
+
       - name: Install dependencies
+        # Only install when cache miss to speed up runs.
         if: steps.cache.outputs.cache-hit != 'true'  
         run: npm ci
         working-directory: 06-react-exercise
+
       - name: Lint code
+        # Run linter inside the exercise folder.
         run: npm run lint
         working-directory: 06-react-exercise
+
+  # Test job: installs deps, runs tests and attempts to upload a test report on failure.
   test:
     runs-on: ubuntu-latest
     steps:
       - name: Get code
         uses: actions/checkout@v3
+
       - name: Cache dependencies
         id: cache
         uses: actions/cache@v3
         with:
           path: ~/06-react-exercise/node_modules
           key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
+
       - name: Install dependencies
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
         working-directory: 06-react-exercise
+
       - name: Test code
         id: run-tests
         run: npm run test
         working-directory: 06-react-exercise
+
       - name: Upload test report
+        # NOTE: when the previous "Test code" step fails, the job will stop and this step will not run.
+        # If you want to always run this step to capture artifacts after a failure, change the condition to:
+        # if: ${{ always() && steps.run-tests.outcome == 'failure' }}
         if: ${{ failure() && steps.run-tests.outcome == 'failure' }}
         uses: actions/upload-artifact@v6
         with:
           name: test-report
           path: 06-react-exercise/test.json
+
+  # Build job: depends on the test job. By default it will be skipped if the test job fails.
   build:
     needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Get code
         uses: actions/checkout@v3
+
       - name: Cache dependencies
         id: cache
         uses: actions/cache@v3
         with:
           path: ~/06-react-exercise/node_modules
           key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
+
       - name: Install dependencies
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
         working-directory: 06-react-exercise
+
       - name: Build website
         id: build-website
         working-directory: 06-react-exercise
         run: npm run build
+
       - name: Upload artifacts
+        # Upload build output so downstream jobs can download it.
         uses: actions/upload-artifact@v6
         with:
           name: dist-files
           path: 06-react-exercise/dist
+
+  # Deploy job: downloads build artifacts and performs deployment steps.
   deploy:
     needs: build
     runs-on: ubuntu-latest
@@ -81,11 +109,16 @@ jobs:
         uses: actions/download-artifact@v7
         with:
           name: dist-files
+
       - name: Output contents
         run: ls
-        #working-directory: 06-react-exercise
+        # Optionally set working-directory if you want to inspect artifact contents inside a specific folder.
+
       - name: Deploy
         run: echo "Deploying..."
+        # Replace above with real deployment commands (rsync, aws cli, etc.)
+
+  # Report job: runs when any of [lint, deploy] fail (because of needs and the `if`).
   report:
     needs: [lint, deploy]
     if: ${{ failure()}}
@@ -94,5 +127,5 @@ jobs:
       - name: Output information
         run: |
           echo "Something went wrong in one of the previous jobs."
+          # Print minimal context to help debugging.
           echo "${{ toJson(github) }} failed."
-
