@@ -1,3 +1,5 @@
+# 06-03 Matrix Demo
+# Demonstrates running the same job across multiple OS and Node.js versions using a matrix strategy.
 name: 06-03 Matrix Demo
 on:
   push:
@@ -6,25 +8,39 @@ on:
 
 jobs:
   build:
+    # Allow individual matrix combinations to fail without failing the entire job.
+    # Useful for experiments or to collect results across all matrix runs even if some fail.
     continue-on-error: true
+
     strategy:
       matrix:
+        # Define combinations to run: Node versions and operating systems.
+        # The job will run for every pair (node-version x operating-system).
         node-version: [14, 16, 18]
         operating-system: [ubuntu-latest, windows-latest]
+
+    # Use the operating-system value from the matrix for the runner.
     runs-on: ${{ matrix['operating-system'] }}
+
     steps:
       - name: Get code
         uses: actions/checkout@v3
+        # Checkout repository code so subsequent steps can access it.
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
+          # Select Node.js version from the matrix for this job run.
           node-version: ${{ matrix['node-version'] }}
 
       - name: Install dependencies
+        # Install dependencies for the exercise located in the 06-react-exercise folder.
+        # Using npm ci for clean, reproducible installs in CI.
         run: npm ci
         working-directory: 06-react-exercise 
 
       - name: Build project
+        # Run the build script inside the exercise folder.
+        # This step will be executed for each matrix combination.
         run: npm run build
         working-directory: 06-react-exercise
