@@ -91,5 +91,5 @@ jobs:
       - name: Output information
         run: |
           echo "Something went wrong in one of the previous jobs."
-          echo "${{ github.job }} failed."
+          echo "${{ toJson(github.job) }} failed."
 
