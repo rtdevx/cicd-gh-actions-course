@@ -106,6 +106,9 @@ jobs:
     uses: ./.github/workflows/06-04-reusable-workflow.yml
     with:
       artifact_name: dist-files
+    #secrets:
+      # Pass deployment token secret if it exists.
+      #DEPLOYMENT_TOKEN: ${{ secrets.DEPLOYMENT_TOKEN }}  
 
   # Report job: runs when any of [lint, deploy] fail (because of needs and the `if`).
   report:
