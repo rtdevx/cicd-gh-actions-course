@@ -1,6 +1,6 @@
 # 06-01 Execution Flow
 # Trigger: run on push to main branch.
-name: 06-01  Execution Flow - Continue on Error
+name: 06-02  Execution Flow - Continue on Error
 on:
   push:
     branches:
