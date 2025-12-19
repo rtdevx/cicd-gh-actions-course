@@ -21,6 +21,12 @@ jobs:
         include:
           - node-version: 18
             operating-system: ubuntu-latest
+        exclude:
+          # Exclude Node.js 12 on Windows as it's not supported.
+          - node-version: 12
+            operating-system: windows-latest
+          - node-version: 12
+            operating-system: ubuntu-latest                    
 
     # Use the operating-system value from the matrix for the runner.
     runs-on: ${{ matrix['operating-system'] }}
